@@ -90,9 +90,9 @@ function Grid() {
 
             <br />
             <div className="flex w-max gap-4">
-                <Button onClick={() => saveGrid()} variant="filled">Save</Button>
-                <Button onClick={() => clearGrid()} variant="gradient">Clear</Button>
-                <Button onClick={() => loadGrid()} variant="outlined">Load</Button>
+                <Button onClick={() => saveGrid()} >Save</Button>
+                <Button onClick={() => clearGrid()} >Clear</Button>
+                <Button onClick={() => loadGrid()} >Load</Button>
             </div>
 
         </>
