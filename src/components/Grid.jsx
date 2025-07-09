@@ -1,17 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 
 
 
 function Grid() {
-    const [grid, setGrid] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]);
 
-    const handleClick = (index) => {
+    const squares = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+
+    const [grid, setGrid] = useState(squares);
+
+
+    // create another copy of the original array [squares], 
+    // switch between true and false for each individual square,
+    // Update the state with the new array
+    function handleClick(index) {
         const newGrid = [...grid];
         newGrid[index] = !newGrid[index];
         setGrid(newGrid);
         console.log(newGrid);
-    };
+    }
+
+    // save the state to local storage
+    function saveGrid() {
+        localStorage.setItem("grid", JSON.stringify(grid)); // we dont necessarilty need to stringify since we are working with a boolean
+    }
+
+    //Clear all the states
+    function clearGrid() {
+        const newGrid = Array(16).fill(false);
+        setGrid(newGrid);
+    }
+
+    // another option for clearing the grid
+    function clearGrid1() {
+        const newGrid = squares;
+        setGrid(newGrid);
+    }
+    // load the state from local storage
+    function loadGrid() { //Get the saved grid from local storage, if it exists convert it to real JS array.
+        const savedGrid = localStorage.getItem("grid");
+        if (savedGrid) {
+            setGrid(JSON.parse(savedGrid));
+        } else {
+            alert("No saved grid found");
+        }
+    }
+
+
 
 
 
@@ -25,6 +60,7 @@ function Grid() {
             <br />
             <div className="grid grid-cols-4 gap-2">
 
+                {/* using a mao to loop through all the 16 states */}
                 {grid.map((active, index) => (
                     <div
                         key={index}
@@ -54,9 +90,9 @@ function Grid() {
 
             <br />
             <div className="flex w-max gap-4">
-                <Button variant="filled">Save</Button>
-                <Button variant="gradient">Clear</Button>
-                <Button variant="outlined">Load</Button>
+                <Button onClick={() => saveGrid()} variant="filled">Save</Button>
+                <Button onClick={() => clearGrid()} variant="gradient">Clear</Button>
+                <Button onClick={() => loadGrid()} variant="outlined">Load</Button>
             </div>
 
         </>
