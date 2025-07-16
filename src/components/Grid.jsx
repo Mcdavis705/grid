@@ -5,7 +5,8 @@ import { Button } from "@material-tailwind/react";
 
 function Grid() {
 
-    const squares = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    // const squares = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+    const squares = Array(16).fill(false);
 
     const [grid, setGrid] = useState(squares);
 
@@ -61,14 +62,16 @@ function Grid() {
             <div className="grid grid-cols-4 gap-2">
 
                 {/* using a mao to loop through all the 16 states */}
-                {grid.map((active, index) => (
-                    <div
-                        key={index}
-                        onClick={() => handleClick(index)}
-                        className={`w-20 h-20 cursor-pointer rounded transition-all duration-200 ${active ? "bg-blue-400" : "bg-gray-300"
-                            }`}
-                    ></div>
-                ))}
+                {grid.map((active, index) => {
+                    return (
+                        <div
+                            key={index}
+                            onClick={() => handleClick(index)}
+                            className={`w-20 h-20 cursor-pointer rounded transition-all duration-200 ${active ? "bg-blue-400" : "bg-gray-300"
+                                }`}
+                        ></div>
+                    )
+                })}
 
                 {/* <div onClick={() => handleClick(0)} className="bg-blue-100 p-5 w-30 h-30"></div>
                 <div onClick={() => handleClick(1)} className="bg-blue-300 p-5 w-30 h-30"></div>
