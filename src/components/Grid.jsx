@@ -26,17 +26,18 @@ function Grid() {
         localStorage.setItem("grid", JSON.stringify(grid)); // we dont necessarilty need to stringify since we are working with a boolean
     }
 
-    //Clear all the states
-    function clearGrid() {
-        const newGrid = Array(16).fill(false);
-        setGrid(newGrid);
-    }
+    // //Clear all the states
+    // function clearGrid() {
+    //     const newGrid = Array(16).fill(false);
+    //     setGrid(newGrid);
+    // }
 
-    // another option for clearing the grid
+    // better option for clearing the grid
     function clearGrid1() {
         const newGrid = squares;
         setGrid(newGrid);
     }
+
     // load the state from local storage
     function loadGrid() { //Get the saved grid from local storage, if it exists convert it to real JS array.
         const savedGrid = localStorage.getItem("grid");
@@ -94,7 +95,7 @@ function Grid() {
             <br />
             <div className="flex w-max gap-4">
                 <Button onClick={() => saveGrid()} >Save</Button>
-                <Button onClick={() => clearGrid()} >Clear</Button>
+                <Button onClick={() => clearGrid1()} >Clear</Button>
                 <Button onClick={() => loadGrid()} >Load</Button>
             </div>
 
